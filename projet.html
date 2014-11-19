@@ -1,0 +1,63 @@
+<html>
+  <head>
+   <link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" />
+   <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
+    <title>Projet 2014 Hybrid & Bloem</title>
+    <meta charset="utf-8">
+    <style></style>
+  </head>
+  <body>
+  <script>
+  function calculPoint(coeff, degre, variableX){
+	var point = 0;
+	var i = 0;
+	while(degre >= i){
+		point += parseInt(coeff[i] * (Math.pow(variableX, (degre - i))));
+		i+=1;
+	}
+	return point;
+  }
+  var degre = prompt('Quel degré est votre fonction?');
+  while(degre != parseInt(degre)){
+	alert('Il faut entrer un nombre entier');
+	var degre = prompt('Quel degré est votre fonction?');
+  }
+  if(degre == parseInt(degre)){
+	if(degre >= 0){
+		i = 0;
+		var coeff = new Array();
+		var maFonction = '';
+		while(degre >= i){
+			coeff.push(prompt("Quel est le coéfficient du degré "+(degre - i)+"?"));
+			if(coeff[i] != 0){
+				if(coeff.length > 1){
+					maFonction += ' + ';
+				}
+				maFonction += coeff[i];
+				if((degre - i) > 0){
+					maFonction += 'x^'+(degre-i);		
+				}
+			}
+			i += 1;
+		}
+		i=-20;
+		var points = new Array();
+		while(i <= 20){
+			points.push(calculPoint(coeff, degre, i));
+			i+=1;
+		}
+		
+	}
+	else{
+		alert('Il faut entrer un degré positif!');
+		location.reload();
+	}
+  }
+  </script>
+  <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
+<script type="text/javascript">
+ var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], axis:true});
+var li3 = board.create('line',[[-1,1],[2,-1]], {straightFirst:false, straightLast:false, strokeWidth:2});
+</script>
+  </body>
+</html>
