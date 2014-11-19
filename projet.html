@@ -7,6 +7,7 @@
     <style></style>
   </head>
   <body>
+  <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
   <script>
   function calculPoint(coeff, degre, variableX){
 	var point = 0;
@@ -44,20 +45,20 @@
 		var points = new Array();
 		while(i <= 20){
 			points.push(calculPoint(coeff, degre, i));
-			i+=1;
+			i+=0.01;
 		}
-		
+		var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], axis:true});
+		y = -20;
+		for (var i = 0; i < points.length; i++) {
+			var li = board.create('line',[[y,points[i]],[(y+0.01),points[(i+1)]]], {straightFirst:false, straightLast:false, strokeWidth:2});
+			y += 0.01;
+		}
 	}
 	else{
 		alert('Il faut entrer un degré positif!');
 		location.reload();
 	}
   }
-  </script>
-  <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
-<script type="text/javascript">
- var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], axis:true});
-var li3 = board.create('line',[[-1,1],[2,-1]], {straightFirst:false, straightLast:false, strokeWidth:2});
 </script>
   </body>
 </html>
