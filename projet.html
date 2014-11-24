@@ -32,18 +32,22 @@
 			coeff.push(prompt("Quel est le coéfficient du degré "+(degre - i)+"?"));
 			if(coeff[i] != 0){
 				if(coeff.length > 1){
-					maFonction += ' + ';
+					maFonction += '+';
 				}
-				maFonction += coeff[i];
+				maFonction += '('+coeff[i]+')';
 				if((degre - i) > 0){
-					maFonction += 'x^'+(degre-i);		
+					y = 0;
+					while((degre-i) > y){
+						  maFonction += '*x';
+						  y += 1;
+					}
 				}
 			}
 			i += 1;
 		}
 		i=-20;
 		var points = new Array();
-		while(i <= 20){
+		/*while(i <= 20){
 			points.push(calculPoint(coeff, degre, i));
 			i+=0.01;
 		}
@@ -52,7 +56,11 @@
 		for (var i = 0; i < points.length; i++) {
 			var li = board.create('line',[[y,points[i]],[(y+0.01),points[(i+1)]]], {straightFirst:false, straightLast:false, strokeWidth:2});
 			y += 0.01;
-		}
+		}*/
+		alert(maFonction);
+		var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], axis:true});
+		eval("function f(x){ return "+maFonction+";}");
+		board.create('functiongraph',[function(x){ return f(x); }]);
 	}
 	else{
 		alert('Il faut entrer un degré positif!');
