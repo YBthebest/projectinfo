@@ -8,65 +8,18 @@
   </head>
   <body>
   <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
-  <script>
-  function calculPoint(coeff, degre, variableX){
-	var point = 0;
-	var i = 0;
-	while(degre >= i){
-		point += parseInt(coeff[i] * (Math.pow(variableX, (degre - i))));
-		i+=1;
-	}
-	return point;
-  }
-  var degre = prompt('Quel degré est votre fonction?');
-  while(degre != parseInt(degre)){
-	alert('Il faut entrer un nombre entier');
-	var degre = prompt('Quel degré est votre fonction?');
-  }
-  if(degre == parseInt(degre)){
-	if(degre >= 0){
-		i = 0;
-		var coeff = new Array();
-		var maFonction = '';
-		while(degre >= i){
-			coeff.push(prompt("Quel est le coéfficient du degré "+(degre - i)+"?"));
-			if(coeff[i] != 0){
-				if(coeff.length > 1){
-					maFonction += '+';
-				}
-				maFonction += '('+coeff[i]+')';
-				if((degre - i) > 0){
-					y = 0;
-					while((degre-i) > y){
-						  maFonction += '*x';
-						  y += 1;
-					}
-				}
-			}
-			i += 1;
-		}
-		i=-20;
-		var points = new Array();
-		/*while(i <= 20){
-			points.push(calculPoint(coeff, degre, i));
-			i+=0.01;
-		}
+  <script type="text/javascript">
+	function grapher(){
 		var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], axis:true});
-		y = -20;
-		for (var i = 0; i < points.length; i++) {
-			var li = board.create('line',[[y,points[i]],[(y+0.01),points[(i+1)]]], {straightFirst:false, straightLast:false, strokeWidth:2});
-			y += 0.01;
-		}*/
-		alert(maFonction);
-		var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], axis:true});
-		eval("function f(x){ return "+maFonction+";}");
+		eval("function f(x){ return "+document.getElementById("myform").maFonction.value+";}");
 		board.create('functiongraph',[function(x){ return f(x); }]);
 	}
-	else{
-		alert('Il faut entrer un degré positif!');
-		location.reload();
-	}
-  }
 </script>
+	<html>
+		<form id="myform">
+			<input type="text" name="maFonction" id="maFonction" /><br>
+			<!-- utiliser regex pour transformer x^3 en x*x*x -->
+		</form>
+		 <button onclick="grapher()">Click me</button> 
   </body>
 </html>
